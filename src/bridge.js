@@ -1,5 +1,5 @@
 import { JSONSchemaBridge } from "uniforms-bridge-json-schema";
-import { schemaDefinition } from "./schema";
+import { schema } from "./schema";
 import Ajv from "ajv";
 
 // バリデーション用の ajv インスタンス作成
