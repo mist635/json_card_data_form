@@ -1,5 +1,5 @@
 // src/schema.js
-export const schema = {
+const schemaDefinition = {
   title: "プロフィール",
   type: "object",
   properties: {
@@ -8,4 +8,5 @@ export const schema = {
   },
   required: ["name", "age"]
 };
-export { schemaDefinition };  
+
+export { schemaDefinition };
