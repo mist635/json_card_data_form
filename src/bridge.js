@@ -1,22 +1,15 @@
 // src/bridge.js
 import { JSONSchemaBridge } from "uniforms-bridge-json-schema";
 import Ajv from "ajv";
+import { schema } from "./schema";
 
-const schema = {
-  type: "object",
-  properties: {
-    name: { type: "string", title: "名前" }
-  },
-  required: ["name"]
-};
-
-const ajv = new Ajv({ allErrors: true, useDefaults: true, strict: false });
+const ajv = new Ajv({ allErrors: true, useDefaults: true });
 
 function createValidator(schema) {
   const validate = ajv.compile(schema);
   return (model) => {
-    const valid = validate(model);
-    return valid ? null : { details: validate.errors || [] };
+    validate(model);
+    return validate.errors?.length ? { details: validate.errors } : null;
   };
 }
 
