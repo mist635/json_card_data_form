@@ -1,16 +1,19 @@
-// src/bridge.js
 import { JSONSchemaBridge } from "uniforms-bridge-json-schema";
+import schemaDefinition from "./schema";
 import Ajv from "ajv";
-import { schema } from "./schema";
 
+// バリデーション用の ajv インスタンス作成
 const ajv = new Ajv({ allErrors: true, useDefaults: true });
 
 function createValidator(schema) {
-  const validate = ajv.compile(schema);
+  const validator = ajv.compile(schema);
   return (model) => {
-    validate(model);
-    return validate.errors?.length ? { details: validate.errors } : null;
+    validator(model);
+    return validator.errors?.length ? { details: validator.errors } : null;
   };
 }
 
-export const bridge = new JSONSchemaBridge(schema, createValidator(schema));
+const schema = new JSONSchemaBridge(schemaDefinition, createValidator(schemaDefinition));
+
+// 👇 ここを忘れずに
+export { schema };
