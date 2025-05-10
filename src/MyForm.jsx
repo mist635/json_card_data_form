@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AutoForm } from "uniforms-material";
-import schema from "./bridge";
+import { schema } from "./bridge";
 
 export default function MyForm() {
   const [status, setStatus] = useState("idle"); // 状態: idle | sending | success | error
